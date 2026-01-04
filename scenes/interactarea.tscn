@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://6nimdfp7a7ag"]
+
+[ext_resource type="Script" uid="uid://c714df07y70sx" path="res://scripts/InteractArea.cs" id="1_u2kq1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ef8yp"]
+
+[node name="InteractArea" type="Area3D"]
+script = ExtResource("1_u2kq1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ef8yp")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]

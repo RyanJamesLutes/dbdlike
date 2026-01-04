@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://fnwtugysrflh"]
+
+[ext_resource type="Texture2D" uid="uid://c07h58mq66v1a" path="res://models/machete/textures/handle_baseColor.png" id="1_ii87s"]
+[ext_resource type="Texture2D" uid="uid://bnl3bilc7x12m" path="res://models/machete/textures/handle_metallicRoughness.png" id="2_44kht"]
+
+[resource]
+resource_name = "handle"
+cull_mode = 2
+albedo_texture = ExtResource("1_ii87s")
+metallic = 1.0
+metallic_texture = ExtResource("2_44kht")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_44kht")
+roughness_texture_channel = 1
+ao_enabled = true
+ao_texture = ExtResource("2_44kht")
+use_z_clip_scale = true
+z_clip_scale = 0.9
+use_fov_override = true

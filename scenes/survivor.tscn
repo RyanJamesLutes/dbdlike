@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://wicr0eittpgt"]
+
+[ext_resource type="Script" uid="uid://u7juortavf8k" path="res://scripts/Survivor.cs" id="1_dvhww"]
+[ext_resource type="PackedScene" uid="uid://dyh50v7xqxy6a" path="res://scenes/skillcheck.tscn" id="2_q7pxf"]
+[ext_resource type="Script" path="res://folder.gd" id="3_7yc2n"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1bvp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lquwl"]
+height = 2.0205078
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dvhww"]
+
+[node name="Survivor" type="CharacterBody3D"]
+script = ExtResource("1_dvhww")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+layers = 4
+mesh = SubResource("CapsuleMesh_1bvp3")
+surface_material_override/0 = SubResource("StandardMaterial3D_tbgi4")
+
+[node name="WalkingCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_lquwl")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="SkillCheck" parent="HUD" instance=ExtResource("2_q7pxf")]
+position = Vector2(576, 320)
+use_mipmaps = true
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -48.0
+offset_right = 400.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+shape = SubResource("SphereShape3D_dvhww")
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+fov = 90.0
+
+[node name="Timers" type="Node" parent="."]
+script = ExtResource("3_7yc2n")
+
+[node name="Chase" type="Timer" parent="Timers"]
+
+[node name="Repair" type="Timer" parent="Timers"]

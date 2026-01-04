@@ -1,0 +1,11 @@
+Model Information:
+* title:	Classic Machete
+* source:	https://sketchfab.com/3d-models/classic-machete-175bb0580dee4890800ce56a6c83b831
+* author:	Mayre (https://sketchfab.com/realmayre)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Classic Machete" (https://sketchfab.com/3d-models/classic-machete-175bb0580dee4890800ce56a6c83b831) by Mayre (https://sketchfab.com/realmayre) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

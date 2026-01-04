@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://fn1jy2mecpq0"]
+
+[ext_resource type="PackedScene" uid="uid://bx3f5jmne8tjh" path="res://models/boulder2/scene.gltf" id="1_cetcg"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cetcg"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_cetcg")]
+
+[node name="defaultMaterial" parent="Sketchfab_model/Collada visual scene group/Rock2_high_001" index="0"]
+layers = 2
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -25, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, -6.666, 0, 0)
+shape = SubResource("CylinderShape3D_cetcg")

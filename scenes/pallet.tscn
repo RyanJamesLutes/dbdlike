@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqxss542fnhkd"]
+
+[ext_resource type="PackedScene" uid="uid://dbcu87027dyg5" path="res://models/pallet/scene.gltf" id="1_nd3el"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_nd3el")]
+
+[node name="Wood_Pallet_Wood_pallet_0" parent="Sketchfab_model/7ad0bc5574d4438697ef875f881c2ed2_fbx/RootNode/Wood_Pallet" index="0"]
+layers = 2

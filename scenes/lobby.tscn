@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjcomu3vn4vnd"]
+
+[ext_resource type="Script" uid="uid://yrtc4nqfe85d" path="res://scripts/Lobby.cs" id="1_o1atq"]
+[ext_resource type="Script" uid="uid://cv70nb3q1gqcl" path="res://scripts/Player.cs" id="2_5gu6x"]
+
+[node name="Lobby" type="Node"]
+script = ExtResource("1_o1atq")
+
+[node name="LobbyMenu" type="CanvasGroup" parent="."]
+
+[node name="ReadyButton" type="Button" parent="LobbyMenu"]
+offset_left = 510.0
+offset_top = 283.0
+offset_right = 566.0
+offset_bottom = 314.0
+text = "Ready"
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("2_5gu6x")

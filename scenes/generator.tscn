@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://0iv8qr5qkotk"]
+
+[ext_resource type="Texture2D" uid="uid://dkb07udlhxjf5" path="res://textures/metalwall054a.png" id="1_5yxne"]
+[ext_resource type="Script" uid="uid://x215ggq0fly1" path="res://scripts/Generator.cs" id="1_w5vnv"]
+[ext_resource type="PackedScene" uid="uid://6nimdfp7a7ag" path="res://scenes/interactarea.tscn" id="3_kgmdj"]
+[ext_resource type="AudioStream" uid="uid://bh2tuf7pryo4j" path="res://sounds/generator_idle.wav" id="4_4pjfl"]
+[ext_resource type="Script" path="res://folder.gd" id="4_kgmdj"]
+[ext_resource type="AudioStream" uid="uid://dgohba224kcql" path="res://sounds/generator_ding.wav" id="5_kgmdj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyhfs"]
+albedo_texture = ExtResource("1_5yxne")
+
+[sub_resource type="BoxMesh" id="BoxMesh_tbgi4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tefeu"]
+
+[node name="Generator" type="StaticBody3D"]
+physics_interpolation_mode = 1
+script = ExtResource("1_w5vnv")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.75, 0)
+layers = 2
+material_override = SubResource("StandardMaterial3D_jyhfs")
+mesh = SubResource("BoxMesh_tbgi4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_tefeu")
+
+[node name="InteractAreaFront" parent="." instance=ExtResource("3_kgmdj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.5)
+
+[node name="InteractAreaBack" parent="." instance=ExtResource("3_kgmdj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
+
+[node name="InteractAreaLeft" parent="." instance=ExtResource("3_kgmdj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, 0)
+
+[node name="InteractAreaRight" parent="." instance=ExtResource("3_kgmdj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+visible = false
+light_color = Color(0, 1, 0, 1)
+light_energy = 1.5
+light_size = 5.0
+
+[node name="Sounds" type="Node" parent="."]
+script = ExtResource("4_kgmdj")
+
+[node name="Idle" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("4_4pjfl")
+volume_db = -8.0
+
+[node name="Ding" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("5_kgmdj")
+
+[node name="Explosion" type="AudioStreamPlayer3D" parent="Sounds"]

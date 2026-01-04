@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbny4l3urcqvc"]
+
+[ext_resource type="Script" uid="uid://n6uyjeayx2gf" path="res://scripts/MainMenu.cs" id="1_5mbse"]
+
+[node name="MainMenu" type="CanvasGroup"]
+script = ExtResource("1_5mbse")
+
+[node name="PlayKillerButton" type="Button" parent="."]
+offset_left = -571.0
+offset_top = -319.0
+offset_right = -527.0
+offset_bottom = -288.0
+text = "Play Killer"
+metadata/_edit_use_anchors_ = true
+
+[node name="PlaySurvivorButton" type="Button" parent="."]
+offset_left = -571.0
+offset_top = -283.0
+offset_right = -533.0
+offset_bottom = -252.0
+text = "Play Survivor"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="PlayKillerButton" to="." method="OnPlayKillerPressed"]
+[connection signal="pressed" from="PlaySurvivorButton" to="." method="OnPlaySurvivorPressed"]

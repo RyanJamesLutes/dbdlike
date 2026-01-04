@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bawq3ti74hgyj"]
+
+[ext_resource type="PackedScene" uid="uid://dww76f2ca560p" path="res://models/boulder1/scene.gltf" id="1_ik822"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ik822"]
+
+[node name="Boulder1" instance=ExtResource("1_ik822")]
+
+[node name="defaultMaterial" parent="Sketchfab_model/Collada visual scene group/Rock" index="0"]
+layers = 2
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(115, 0, 0, 0, 115, 0, 0, 0, 115, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ik822")

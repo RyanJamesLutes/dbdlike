@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://blqhl1wmyj2wy"]
+
+[ext_resource type="PackedScene" uid="uid://7cbq1tagdmwv" path="res://scenes/machete.tscn" id="1_xasec"]
+
+[node name="Weapon" type="Node3D"]
+transform = Transform3D(-3.0908613e-08, -3.0908613e-08, -1, -0.70710665, 0.70710665, 0, 0.70710665, 0.70710665, -4.371139e-08, 0, 0, 0)
+
+[node name="Model" parent="." instance=ExtResource("1_xasec")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
