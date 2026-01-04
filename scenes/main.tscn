@@ -1,17 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkjqgnbecdqq0"]
+[gd_scene load_steps=5 format=3 uid="uid://dkjqgnbecdqq0"]
 
 [ext_resource type="Script" uid="uid://jf6retvi2kxn" path="res://scripts/Network.cs" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://bbny4l3urcqvc" path="res://scenes/mainmenu.tscn" id="2_0wfyh"]
-[ext_resource type="Script" uid="uid://cpnsmaqit4h6w" path="res://scripts/Game.cs" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://b7qctmvj1fglf" path="res://scripts/Game.cs" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bjcomu3vn4vnd" path="res://scenes/lobby.tscn" id="4_tbgi4"]
 
 [node name="Main" type="Node3D"]
 
-[node name="Network" type="Node" parent="."]
-script = ExtResource("1_o5qli")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="MainMenu" parent="." instance=ExtResource("2_0wfyh")]
-
 [node name="Game" type="Node3D" parent="."]
 script = ExtResource("4_jyhfs")
+
+[node name="Network" type="Node" parent="Game"]
+script = ExtResource("1_o5qli")
+
+[node name="Camera2D" type="Camera2D" parent="Game"]
+
+[node name="MainMenu" parent="Game" instance=ExtResource("2_0wfyh")]
+
+[node name="Lobby" parent="Game" instance=ExtResource("4_tbgi4")]
+visible = false
