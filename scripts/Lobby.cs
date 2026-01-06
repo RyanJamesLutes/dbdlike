@@ -12,7 +12,7 @@ public partial class Lobby : Node
 	[Signal]
 	public delegate void ServerDisconnectedEventHandler();
 
-	private const int Port = 7000;
+	private const int Port = 8000;
 	private const string DefaultServerIP = "127.0.0.1"; // IPv4 localhost
 	private const int MaxConnections = 5;
 

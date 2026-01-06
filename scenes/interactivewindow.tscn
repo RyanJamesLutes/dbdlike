@@ -1,28 +1,26 @@
 [gd_scene load_steps=6 format=3 uid="uid://dxl02ewfw5doc"]
 
-[ext_resource type="PackedScene" uid="uid://c4clc5b34jv2x" path="res://scenes/wall.tscn" id="1_fqtj5"]
-[ext_resource type="Texture2D" uid="uid://bnhmggakm1pv1" path="res://textures/milflr002.png" id="2_5ag58"]
-[ext_resource type="PackedScene" uid="uid://6nimdfp7a7ag" path="res://scenes/interactarea.tscn" id="3_5ag58"]
+[ext_resource type="PackedScene" uid="uid://6nimdfp7a7ag" path="res://scenes/interactarea.tscn" id="1_trbjt"]
+[ext_resource type="PackedScene" uid="uid://c4clc5b34jv2x" path="res://scenes/wall.tscn" id="2_ynh3d"]
+[ext_resource type="Texture2D" uid="uid://bnhmggakm1pv1" path="res://textures/milflr002.png" id="3_rvfvb"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_bpaf6"]
+[sub_resource type="BoxMesh" id="BoxMesh_w47e0"]
 resource_local_to_scene = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nc5hy"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxq3c"]
 resource_local_to_scene = true
-albedo_texture = ExtResource("2_5ag58")
-uv1_scale = Vector3(4, 1.333, 4)
-uv1_offset = Vector3(0, 1.333, 0)
+albedo_texture = ExtResource("3_rvfvb")
+uv1_scale = Vector3(4, 4, 4)
 
 [node name="Window" type="Node3D"]
 
-[node name="Wall" parent="." instance=ExtResource("1_fqtj5")]
-transform = Transform3D(-8.742278e-09, 0, 1.2, 0, 1.334, 0, -0.2, 0, -5.2453668e-08, 0, 0.667, 0)
-mesh = SubResource("BoxMesh_bpaf6")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_nc5hy")
+[node name="MeshInstance3D" parent="." instance=ExtResource("2_ynh3d")]
+transform = Transform3D(-8.742278e-09, 0, 2, 0, 1.2, 0, -0.2, 0, -8.742278e-08, 0, 0.5999999, 0)
+mesh = SubResource("BoxMesh_w47e0")
+surface_material_override/0 = SubResource("StandardMaterial3D_jxq3c")
 
-[node name="InteractAreaFront" parent="." instance=ExtResource("3_5ag58")]
+[node name="InteractAreaFront" parent="." instance=ExtResource("1_trbjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
 
-[node name="InteractAreaBack" parent="." instance=ExtResource("3_5ag58")]
+[node name="InteractAreaBack" parent="." instance=ExtResource("1_trbjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)

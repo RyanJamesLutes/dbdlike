@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Pallet : Node3D
+public partial class Pallet : Prop
 {
 	public enum PalletState { Up, Dropped, Broken, Blocked};
 	public enum InteractState { Dropping, Vaulting, Breaking }

@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cawo62op33poh"]
 
 [ext_resource type="Script" uid="uid://bfl5wbn5xpuxi" path="res://scripts/Pallet.cs" id="1_r0ora"]
-[ext_resource type="PackedScene" uid="uid://dqxss542fnhkd" path="res://scenes/pallet.tscn" id="2_svv35"]
+[ext_resource type="PackedScene" uid="uid://dqxss542fnhkd" path="res://models/pallet/pallet.tscn" id="2_svv35"]
 [ext_resource type="Script" uid="uid://c714df07y70sx" path="res://scripts/InteractArea.cs" id="3_18mx4"]
 [ext_resource type="Script" uid="uid://qhmwx1hfy4fw" path="res://scripts/StunArea.cs" id="4_3roag"]
 

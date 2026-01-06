@@ -1,8 +1,7 @@
 using Godot;
 using System;
-using System.Timers;
 
-public partial class Generator : StaticBody3D
+public partial class Generator : Prop
 {
 	public enum GeneratorState { Idle, Repairing, Regressing, Blocked, Complete };
 	

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://7dqu70dxxeme"]
 
 [ext_resource type="PackedScene" uid="uid://cawo62op33poh" path="res://scenes/interactivepallet.tscn" id="1_f3d2y"]
-[ext_resource type="PackedScene" uid="uid://bawq3ti74hgyj" path="res://scenes/boulder1.tscn" id="3_f3d2y"]
-[ext_resource type="PackedScene" uid="uid://fn1jy2mecpq0" path="res://scenes/boulder2.tscn" id="3_ie6r0"]
+[ext_resource type="PackedScene" uid="uid://bawq3ti74hgyj" path="res://models/boulder1/boulder1.tscn" id="3_f3d2y"]
+[ext_resource type="PackedScene" uid="uid://fn1jy2mecpq0" path="res://models/boulder2/boulder2.tscn" id="3_ie6r0"]
 
 [node name="BoulderLoop" type="Node3D"]
 
@@ -10,7 +10,7 @@
 transform = Transform3D(0.9999025, -0.013962179, 0, 0.013962179, 0.9999025, 0, 0, 0, 1, -0.7, 0, 0)
 
 [node name="Boulder1" parent="." instance=ExtResource("3_f3d2y")]
-transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, -1.2, 0, 0)
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, -1.25, 0, 0)
 
 [node name="Boulder2" parent="." instance=ExtResource("3_ie6r0")]
-transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 1.6999999, 0, 0)
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 1.666, 0, 0)

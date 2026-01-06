@@ -1,23 +1,26 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 
-public partial class Map : Node3D
+public partial class Prop : Node3D
 {
-	private List<Tile> _tiles = new List<Tile>();
+	private int _mapLimit;
+	private int _tileLimit;
 	
-	public List<Tile> Tiles
+	public int MapLimit
 	{
-		get { return _tiles; }
+		get { return _mapLimit; }
+		set { _mapLimit = value; }
+	}
+	
+	public int TileLimit
+	{
+		get { return _tileLimit; }
+		set { _tileLimit = value; }
 	}
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		foreach (Tile tile in GetChildren())
-		{
-			_tiles.Add(tile);
-		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
