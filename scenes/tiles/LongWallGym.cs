@@ -7,8 +7,8 @@ public partial class LongWallGym : Node3D
 	public override void _Ready()
 	{
 		Random RNG = new Random();
-		RotateY(Mathf.DegToRad(90 * RNG.Next(3)));
 		GetNode<PropSpawner>("GeneratorSpawn").SpawnProp("Generator");
+		RotateY(Mathf.DegToRad(90 * RNG.Next(4)));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

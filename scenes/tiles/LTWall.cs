@@ -9,7 +9,7 @@ public partial class LTWall : Node3D
 		Random RNG = new Random();
 		
 		GetNode<PropSpawner>("GeneratorSpawn").SpawnProp("Generator");
-		RotateY(Mathf.DegToRad(90 * RNG.Next(3)));
+		RotateY(Mathf.DegToRad(90 * RNG.Next(4)));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
