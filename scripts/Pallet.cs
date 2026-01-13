@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Pallet : Prop
 {
@@ -7,6 +8,7 @@ public partial class Pallet : Prop
 	public enum InteractState { Dropping, Vaulting, Breaking }
 	
 	private PalletState _state = PalletState.Up;
+	private List<ENetMultiplayerPeer> playersBlocked = new List<ENetMultiplayerPeer>();
 	private bool _isFragile = false;
 	private StunArea _stunArea;
 	private InteractState _interaction;

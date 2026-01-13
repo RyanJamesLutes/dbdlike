@@ -1,21 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://7cbq1tagdmwv"]
+[gd_scene load_steps=4 format=3 uid="uid://7cbq1tagdmwv"]
 
 [ext_resource type="PackedScene" uid="uid://cjkj7qils3tsl" path="res://models/machete/scene.gltf" id="1_od381"]
 [ext_resource type="Material" uid="uid://fnwtugysrflh" path="res://models/machete/handle.tres" id="2_1s1h1"]
 [ext_resource type="Material" uid="uid://d2ppkc3qhvqan" path="res://models/machete/sharp.tres" id="3_noihs"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b38jh"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1s1h1"]
-
 [node name="Sketchfab_Scene" instance=ExtResource("1_od381")]
 
 [node name="Object_2" parent="Sketchfab_model/c3ce5b16254d403cb9c654acd9f1653a_obj_cleaner_materialmerger_gles" index="0"]
-layers = 8
+layers = 4
 material_override = ExtResource("2_1s1h1")
-surface_material_override/0 = SubResource("ShaderMaterial_b38jh")
+gi_mode = 0
 
 [node name="Object_3" parent="Sketchfab_model/c3ce5b16254d403cb9c654acd9f1653a_obj_cleaner_materialmerger_gles" index="1"]
-layers = 8
+layers = 4
 material_override = ExtResource("3_noihs")
-surface_material_override/0 = SubResource("ShaderMaterial_1s1h1")
+cast_shadow = 0
+gi_mode = 0

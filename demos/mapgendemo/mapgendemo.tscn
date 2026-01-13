@@ -1,0 +1,262 @@
+[gd_scene load_steps=10 format=3 uid="uid://djmge87ip4nye"]
+
+[ext_resource type="Script" uid="uid://2sgso2kp1w4r" path="res://demos/mapgendemo/MapGenDemo.cs" id="1_fw4df"]
+[ext_resource type="Texture2D" uid="uid://okf4fiki5xtt" path="res://textures/forest_grass_01.png" id="1_hkjbe"]
+[ext_resource type="Script" uid="uid://b56bcb6sdpak8" path="res://demos/mapgendemo/GenerateButton.cs" id="2_x5bky"]
+[ext_resource type="Script" uid="uid://1brbhd26mlvi" path="res://scripts/TileSpawner.cs" id="5_a3gi2"]
+
+[sub_resource type="Sky" id="Sky_c27os"]
+
+[sub_resource type="Environment" id="Environment_fw4df"]
+background_mode = 2
+background_color = Color(0.015686275, 0.015686275, 0.015686275, 1)
+sky = SubResource("Sky_c27os")
+ambient_light_source = 2
+ambient_light_color = Color(0.8392157, 0.8627451, 0.8901961, 1)
+ambient_light_energy = 4.0
+fog_enabled = true
+fog_light_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+fog_light_energy = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fw4df"]
+albedo_texture = ExtResource("1_hkjbe")
+detail_blend_mode = 3
+detail_uv_layer = 1
+uv1_scale = Vector3(40, 40, 40)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2v08l"]
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("StandardMaterial3D_fw4df")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hkjbe"]
+
+[node name="MapGenDemo" type="Node3D"]
+script = ExtResource("1_fw4df")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fw4df")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 25, 70)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="CameraPivot/Camera3D"]
+
+[node name="GenerateButton" type="Button" parent="CameraPivot/Camera3D/CanvasGroup"]
+offset_left = 16.0
+offset_top = 608.0
+offset_right = 96.0
+offset_bottom = 639.0
+text = "Generate"
+script = ExtResource("2_x5bky")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(64, 0, 0, 0, 64, 0, 0, 0, 64, 0, 0, 0)
+layers = 3
+mesh = SubResource("PlaneMesh_2v08l")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 0, 0, 0)
+visible = false
+shape = SubResource("WorldBoundaryShape3D_hkjbe")
+
+[node name="Spawner1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, -48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner5" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner6" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner7" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, -48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner8" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, -32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner9" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner10" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner11" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner12" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner13" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner14" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, -32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner15" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, -16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner16" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner17" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner18" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner19" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner20" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner21" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, -16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner22" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, 0)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner23" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 0)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner24" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner25" type="Node3D" parent="."]
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner26" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner27" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner28" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 0)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner29" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, 16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner30" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner31" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner32" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner33" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner34" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner35" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 16)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner36" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, 48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner37" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner38" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner39" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner40" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner41" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner42" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 48)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner43" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, 32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner44" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner45" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner46" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner47" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner48" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 32)
+script = ExtResource("5_a3gi2")
+
+[node name="Spawner49" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 32)
+script = ExtResource("5_a3gi2")
+
+[connection signal="pressed" from="CameraPivot/Camera3D/CanvasGroup/GenerateButton" to="." method="OnGenerateButtonPressed"]

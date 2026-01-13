@@ -20,7 +20,8 @@ public partial class Killer : CharacterBody3D
 	private List<Node3D> _interactAreas = new List<Node3D>();
 	private BasicAttackArea _basicAttackArea;
 	private Node3D _interactTarget;
-	private AnimationPlayer _weaponAnimation;
+	private AnimationPlayer _killerAnim;
+	private AnimationPlayer _weaponAnim;
 	
 	[Export] public float Speed 
 	{ 
@@ -68,7 +69,7 @@ public partial class Killer : CharacterBody3D
 	
 	public void DoBasicAttack()
 	{
-			_weaponAnimation.Play("basicattack");
+			_weaponAnim.Play("basicattack");
 			_interaction = InteractState.AttackRecovery;
 			GetNode<Timer>("Timers/AttackRecovery").Start();
 			List<Node3D> targets = _basicAttackArea.CollidingBodies;
@@ -84,8 +85,6 @@ public partial class Killer : CharacterBody3D
 	
 	public void Stun(Node3D pallet, Node3D survivor, float seconds)
 	{
-		Timer stunTimer = GetNode<Timer>("Timers/Stun");
-		stunTimer.Start(seconds);
 		_movement = MoveState.Stunned;
 	}
 	
@@ -93,7 +92,7 @@ public partial class Killer : CharacterBody3D
 	{
 		_camera = GetNode<Camera3D>("Camera3D");
 		_progressBar = GetNode<ProgressBar>("HUD/ProgressBar");
-		_weaponAnimation = GetNode<AnimationPlayer>("WeaponAnim");	
+		_weaponAnim = GetNode<AnimationPlayer>("WeaponAnim");	
 		_basicAttackArea = GetNode<BasicAttackArea>("Camera3D/BasicAttackArea");
 		
 		GetNode<AnimationPlayer>("RedStainAnim").Play("noise");

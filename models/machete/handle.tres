@@ -5,7 +5,6 @@
 
 [resource]
 resource_name = "handle"
-cull_mode = 2
 albedo_texture = ExtResource("1_ii87s")
 metallic = 1.0
 metallic_texture = ExtResource("2_44kht")
@@ -14,6 +13,7 @@ roughness_texture = ExtResource("2_44kht")
 roughness_texture_channel = 1
 ao_enabled = true
 ao_texture = ExtResource("2_44kht")
+backlight = Color(0.8392157, 0.8627451, 0.8901961, 1)
 use_z_clip_scale = true
 z_clip_scale = 0.9
 use_fov_override = true

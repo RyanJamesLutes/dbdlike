@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://ciqthunbe58db"]
+
+[ext_resource type="Texture2D" uid="uid://okf4fiki5xtt" path="res://textures/forest_grass_01.png" id="1_c27os"]
+[ext_resource type="PackedScene" uid="uid://c47h80xpwkj1b" path="res://scenes/killer.tscn" id="2_goqyv"]
+[ext_resource type="PackedScene" uid="uid://0iv8qr5qkotk" path="res://scenes/props/generator.tscn" id="3_o7ia3"]
+[ext_resource type="PackedScene" uid="uid://dc6d3xlsv5mf2" path="res://scenes/tiles/ltwall.tscn" id="5_2nkbr"]
+[ext_resource type="PackedScene" uid="uid://e77db3esdk7s" path="res://scenes/tiles/longwallgym.tscn" id="5_c27os"]
+
+[sub_resource type="Sky" id="Sky_c27os"]
+
+[sub_resource type="Environment" id="Environment_goqyv"]
+background_mode = 2
+background_color = Color(0.015686275, 0.015686275, 0.015686275, 1)
+sky = SubResource("Sky_c27os")
+ambient_light_color = Color(0.8392157, 0.8627451, 0.8901961, 1)
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_light_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+fog_light_energy = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hkjbe"]
+albedo_texture = ExtResource("1_c27os")
+detail_blend_mode = 3
+detail_uv_layer = 1
+uv1_scale = Vector3(40, 40, 40)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dkeku"]
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("StandardMaterial3D_hkjbe")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5orm7"]
+
+[node name="TestMap" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_goqyv")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_dkeku")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+visible = false
+shape = SubResource("WorldBoundaryShape3D_5orm7")
+
+[node name="Killer" parent="." instance=ExtResource("2_goqyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+
+[node name="Generator" parent="." instance=ExtResource("3_o7ia3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="LTWall" parent="." instance=ExtResource("5_2nkbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+
+[node name="LongWallGym" parent="." instance=ExtResource("5_c27os")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 16)

@@ -1,23 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://cawo62op33poh"]
+[gd_scene load_steps=7 format=3 uid="uid://qdvyj27aorup"]
 
-[ext_resource type="Script" uid="uid://bfl5wbn5xpuxi" path="res://scripts/Pallet.cs" id="1_r0ora"]
+[ext_resource type="PackedScene" uid="uid://6nimdfp7a7ag" path="res://scenes/interactarea.tscn" id="1_5e7e6"]
 [ext_resource type="PackedScene" uid="uid://dqxss542fnhkd" path="res://models/pallet/pallet.tscn" id="2_svv35"]
-[ext_resource type="Script" uid="uid://c714df07y70sx" path="res://scripts/InteractArea.cs" id="3_18mx4"]
-[ext_resource type="Script" uid="uid://qhmwx1hfy4fw" path="res://scripts/StunArea.cs" id="4_3roag"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nd3el"]
-points = PackedVector3Array(0.9142802, 0.11428571, 0.8142857, -0.91428566, -0.11428571, -0.8142857, -0.91428566, -0.11428571, 0.8142857, -0.91428566, 0.11428571, -0.8142857, 0.9142802, -0.11428571, -0.8142857, -0.91428566, 0.11428571, 0.8142857, 0.9142802, -0.11428571, 0.8142857, 0.9142802, 0.11428571, -0.8142857)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oqlju"]
+points = PackedVector3Array(0.09300791, 0.08434843, 0.016318168, 0.09240651, 0.08411636, 0.018849948, 0.09300791, -0.08445515, 0.016318168, 0.09300791, 0.08434843, 0, -0.09317084, 0.08434843, 0.016318168, 0.09240651, -0.08500219, 0.018849948, -0.09249654, 0.08411636, 0.018849948, 0.09300791, -0.08445515, 0, -0.09317084, 0.08434843, 0, -0.09317084, -0.08445515, 0.016318168, 0.09240651, -0.08500219, 0.0162868, -0.09249654, -0.08500219, 0.018849948, -0.09317084, -0.08445515, 0, -0.09249654, -0.08500219, 0.0162868)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dhakx"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_kpbrv"]
-
-[sub_resource type="Animation" id="Animation_dhakx"]
+[sub_resource type="Animation" id="Animation_1t3jx"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:position")
+tracks/0/path = NodePath("..:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -29,7 +23,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot:rotation")
+tracks/1/path = NodePath("..:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -39,87 +33,61 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_kpbrv"]
+[sub_resource type="Animation" id="Animation_ljrvg"]
 resource_name = "drop"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:position")
+tracks/0/path = NodePath("..:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.2, 0.4, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.20000005)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot:rotation")
+tracks/1/path = NodePath("..:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.3962634)]
+"values": [Vector3(0, 0, 0), Vector3(1.4835298, 0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uq2hj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qqp8n"]
 _data = {
-&"RESET": SubResource("Animation_dhakx"),
-&"drop": SubResource("Animation_kpbrv")
+&"RESET": SubResource("Animation_1t3jx"),
+&"drop": SubResource("Animation_ljrvg")
 }
 
-[node name="Pallet" type="Node3D"]
-script = ExtResource("1_r0ora")
+[node name="InteractivePallet" type="Node3D"]
+
+[node name="InteractAreaBack" parent="." instance=ExtResource("1_5e7e6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+
+[node name="InteractAreaFront" parent="." instance=ExtResource("1_5e7e6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
 
 [node name="Pivot" type="Node3D" parent="."]
 
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Pivot"]
-transform = Transform3D(0.17364815, 0.9848073, 0, -0.9848073, 0.17364815, 0, 0, 0, 1, 0, 0.85, 0)
+[node name="Pallet" type="AnimatableBody3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.1, 0)
+sync_to_physics = false
 
-[node name="Model" parent="Pivot/AnimatableBody3D" instance=ExtResource("2_svv35")]
+[node name="Model" parent="Pivot/Pallet" instance=ExtResource("2_svv35")]
+transform = Transform3D(-7.6927655e-08, 5.0654954e-08, 1.4, -0.36234665, 1.3522961, -6.883928e-08, -1.3522961, -0.36234665, -6.119594e-08, 0, 0.099999905, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/AnimatableBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-shape = SubResource("ConvexPolygonShape3D_nd3el")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Pallet"]
+transform = Transform3D(-6.7710556e-07, -12.322589, -1.5617474e-06, -3.1893208, -1.333284e-06, 11.902707, -11.902707, 1.0582436e-06, -3.1893208, 0.000795214, 0.00012726367, -0.00015217176)
+shape = SubResource("ConvexPolygonShape3D_oqlju")
 
-[node name="InteractAreaFront" type="Area3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.1, 0.5, -1)
-visible = false
-script = ExtResource("3_18mx4")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractAreaFront"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-shape = SubResource("BoxShape3D_dhakx")
-
-[node name="InteractAreaBack" type="Area3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.1, 0.5, 1)
-visible = false
-script = ExtResource("3_18mx4")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractAreaBack"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-shape = SubResource("BoxShape3D_dhakx")
-
-[node name="StunArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 0)
-script = ExtResource("4_3roag")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StunArea"]
-transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0, 0)
-shape = SubResource("SphereShape3D_kpbrv")
-
-[node name="PalletAnim" type="AnimationPlayer" parent="."]
+[node name="PalletAnim" type="AnimationPlayer" parent="Pivot/Pallet"]
 libraries = {
-&"": SubResource("AnimationLibrary_uq2hj")
+&"": SubResource("AnimationLibrary_qqp8n")
 }
-
-[connection signal="body_entered" from="InteractAreaFront" to="InteractAreaFront" method="OnBodyEntered"]
-[connection signal="body_exited" from="InteractAreaFront" to="InteractAreaFront" method="OnBodyExited"]
-[connection signal="body_entered" from="InteractAreaBack" to="InteractAreaBack" method="OnBodyEntered"]
-[connection signal="body_exited" from="InteractAreaBack" to="InteractAreaBack" method="OnBodyExited"]
-[connection signal="body_entered" from="StunArea" to="StunArea" method="OnBodyEntered"]
-[connection signal="body_exited" from="StunArea" to="StunArea" method="OnBodyExited"]

@@ -20,7 +20,7 @@ public partial class InteractArea : Area3D
 	
 	void OnBodyEntered(Node3D body)
 	{
-		//GD.Print(body.Name + " entered area " + GetParent().Name + "/" + Name);
+		GD.Print(body.Name + " entered area " + GetParent().Name + "/" + Name);
 		_collidingBodies.Add(body);
 		if (body is Killer killer)
 		{
@@ -30,11 +30,17 @@ public partial class InteractArea : Area3D
 		{
 			survivor.InteractAreas.Add(this);
 		}
+		// Check if InteractArea is blocked by static bodies, and remove it if so. Will not work as expected if collision layers are not configured correctly!
+		if (body is StaticBody3D staticBody)
+		{
+			GD.Print(Name + "blocked, removing from SceneTree.");
+			QueueFree();
+		}
 	}
 	
 	void OnBodyExited(Node3D body)
 	{
-		//GD.Print(body.Name + " exited area " + GetParent().Name + "/" + Name);
+		GD.Print(body.Name + " exited area " + GetParent().Name + "/" + Name);
 		_collidingBodies.Remove(body);
 		if (body is Killer killer)
 		{
@@ -52,6 +58,7 @@ public partial class InteractArea : Area3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
