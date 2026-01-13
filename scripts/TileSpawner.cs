@@ -56,7 +56,6 @@ public partial class TileSpawner : Node3D
 	public override void _Ready()
 	{
 		SpawnTile(RandomTileName());
-		_tileInstance.RotateY(Mathf.DegToRad(90 * _RNG.Next(3)));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

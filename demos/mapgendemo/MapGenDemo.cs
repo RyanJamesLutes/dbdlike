@@ -9,7 +9,6 @@ public partial class MapGenDemo : Node3D
 	
 	public void OnGenerateButtonPressed()
 	{
-		GD.Print("Generating...");
 		foreach (TileSpawner spawner in _spawners)
 		{
 			spawner.DespawnTile();
