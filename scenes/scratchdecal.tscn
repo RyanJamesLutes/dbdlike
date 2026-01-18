@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b603e5xyoylv4"]
+
+[ext_resource type="Texture2D" uid="uid://c5vscljiwulox" path="res://textures/scratch.png" id="1_dl8nx"]
+[ext_resource type="Script" uid="uid://nyv70lk4fdi4" path="res://scripts/ScratchDecal.cs" id="2_6qptd"]
+
+[node name="Decal" type="Decal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.9604645e-08, 0)
+layers = 8
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("1_dl8nx")
+albedo_mix = 0.0
+script = ExtResource("2_6qptd")
+
+[node name="LifespanTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LifespanTimer" to="." method="queue_free"]
