@@ -173,6 +173,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.8999996)
 
 [node name="Walls" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+layers = 2
 material_override = SubResource("StandardMaterial3D_hap1q")
 mesh = SubResource("ArrayMesh_28lbr")
 

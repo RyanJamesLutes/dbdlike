@@ -8,6 +8,7 @@ public partial class Survivor : CharacterBody3D
 	public enum MoveState { Crawling, Crouching, Walking, Running, Falling, Staggered, Interacting }
 	public enum InteractState { None, Repairing, Healing, DroppingPallet, VaultingPallet, VaultingWindow, CleansingTotem, BooningTotem, Invoking }
 	
+	private MeshInstance3D _model;
 	[Export] private float _speed = 2.26f;
 	private float _haste = 1f;
 	private float _repairSpeed = 0.016f;
@@ -97,6 +98,7 @@ public partial class Survivor : CharacterBody3D
 	
 	public override void _Ready()
 	{
+		_model = GetNode<MeshInstance3D>("Model");
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
 		_cameraArm = GetNode<SpringArm3D>("CameraPivot/SpringArm3D");
 		_camera = GetNode<Camera3D>("CameraPivot/SpringArm3D/Camera3D");
@@ -160,16 +162,16 @@ public partial class Survivor : CharacterBody3D
 		Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
 		Vector3 direction = Vector3.Zero;
 		
+		// Align movement direction with the camera's horizontal plane
+		Vector3 cameraForward = -_cameraArm.GlobalTransform.Basis.Z;
+		Vector3 cameraRight = _cameraArm.GlobalTransform.Basis.X;
+		
 		if (inputDir != Vector2.Zero)
 		{
-		// Align movement direction with the camera's horizontal plane
-		Vector3 cameraForward = _cameraArm.GlobalTransform.Basis.Z;
-		Vector3 cameraRight = _cameraArm.GlobalTransform.Basis.X;
 		cameraForward.Y = 0; // Keep movement horizontal
 		cameraRight.Y = 0;
-		cameraForward = -cameraForward.Normalized();
-		cameraRight = cameraRight.Normalized();
 		direction = -cameraForward * inputDir.Y + cameraRight * inputDir.X;
+		_model.LookAt(GlobalPosition + direction + new Vector3(0, 1, 0));
 		}
 		if (direction != Vector3.Zero)
 		{

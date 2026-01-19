@@ -8,7 +8,7 @@ public partial class ScratchSpawner : Node3D
 	private List<RayCast3D> _rayCasts = new List<RayCast3D>();
 	private Timer _spawnTimer;
 	
-	[Export] public PackedScene scratchDecal = ResourceLoader.Load<PackedScene>("res://scenes/scratchdecal.tscn");
+	[Export] public PackedScene scratchScene = ResourceLoader.Load<PackedScene>("res://scenes/scratch.tscn");
 	
 	public void SpawnScratch()
 	{
@@ -24,7 +24,7 @@ public partial class ScratchSpawner : Node3D
 					Node3D collider = rayCast.GetCollider() as Node3D;
 					
 					// Instantiate decal.
-					Decal scratchInstance = scratchDecal.Instantiate<Decal>();
+					Node3D scratchInstance = scratchScene.Instantiate<Node3D>();
 					GetTree().Root.AddChild(scratchInstance);
 					
 					// Position decal with random offset.
@@ -34,19 +34,19 @@ public partial class ScratchSpawner : Node3D
 					switch (rayCast.Name)
 					{
 						case "RayCastFront":
-							scratchInstance.LookAt(GlobalPosition.Normalized(), Vector3.Back);
+							scratchInstance.LookAt(scratchInstance.GlobalPosition.Normalized(), Vector3.Back);
 							break;
 						case "RayCastLeft":
-							scratchInstance.LookAt(GlobalPosition.Normalized(), Vector3.Right);
+							scratchInstance.LookAt(scratchInstance.GlobalPosition.Normalized(), Vector3.Right);
 							break;
 						case "RayCastRight":
-							scratchInstance.LookAt(GlobalPosition.Normalized(), Vector3.Left);
+							scratchInstance.LookAt(scratchInstance.GlobalPosition.Normalized(), Vector3.Left);
 							break;
 						case "RayCastBack":
-							scratchInstance.LookAt(GlobalPosition.Normalized(), Vector3.Forward);
+							scratchInstance.LookAt(scratchInstance.GlobalPosition.Normalized(), Vector3.Forward);
 							break;
 						case "RayCastDown":
-							scratchInstance.LookAt(GlobalPosition.Normalized(), Vector3.Up);
+							scratchInstance.LookAt(scratchInstance.GlobalPosition.Normalized(), Vector3.Up);
 							break;
 					}
 				}
