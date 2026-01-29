@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b8j72i186jt04"]
+
+[ext_resource type="Script" uid="uid://cfckb1mpdi6f" path="res://scripts/ScratchSpawner.cs" id="1_ohv8u"]
+
+[node name="ScratchSpawner" type="Node3D" unique_id=1493648775]
+script = ExtResource("1_ohv8u")
+
+[node name="RayCastFront" type="RayCast3D" parent="." unique_id=908737943]
+target_position = Vector3(0, 0, -1)
+collision_mask = 3
+
+[node name="RayCastLeft" type="RayCast3D" parent="." unique_id=1456042841]
+target_position = Vector3(-1, 0, 0)
+collision_mask = 3
+
+[node name="RayCastRight" type="RayCast3D" parent="." unique_id=1076236708]
+target_position = Vector3(1, 0, 0)
+collision_mask = 3
+
+[node name="RayCastBack" type="RayCast3D" parent="." unique_id=2132267082]
+target_position = Vector3(0, 0, 1)
+collision_mask = 3
+
+[node name="RayCastDown" type="RayCast3D" parent="." unique_id=1738624903]
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 3
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1795070460]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="SpawnScratch"]

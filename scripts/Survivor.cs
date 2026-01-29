@@ -5,19 +5,21 @@ using System.Collections.Generic;
 public partial class Survivor : CharacterBody3D
 {
 	public enum HealthState { Healthy, Injured, Wounded, Dying };
-	public enum MoveState { Crawling, Crouching, Walking, Running, Falling, Staggered, Interacting }
+	public enum MoveState { Crawling, Crouching, Standing, Walking, Running, Falling, Staggered, Interacting }
 	public enum InteractState { None, Repairing, Healing, DroppingPallet, VaultingPallet, VaultingWindow, CleansingTotem, BooningTotem, Invoking }
 	
-	private MeshInstance3D _model;
+	private Node3D _model;
 	[Export] private float _speed = 2.26f;
 	private float _haste = 1f;
 	private float _repairSpeed = 0.016f;
 	private float _mouseSensitivity = 0.002f;
 	[Export] private HealthState _health = HealthState.Healthy;
-	private MoveState _movement = MoveState.Walking;
+	private MoveState _movement = MoveState.Standing;
 	private InteractState _interaction = InteractState.None;
 	private List<Node3D> _interactAreas = new List<Node3D>();
 	private Node3D _interactTarget;
+	private Item _heldItem;
+	private AnimationPlayer _survivorAnim;
 	// Camera
 	private Node3D _cameraPivot;
 	private SpringArm3D _cameraArm;
@@ -32,12 +34,12 @@ public partial class Survivor : CharacterBody3D
 			switch (_movement)
 			{
 				case MoveState.Running:
-					return 4f * _haste;
+					return 8f * _haste;
 				case MoveState.Interacting:
 					return 0f;
 				case MoveState.Walking:
 				default:
-					return 2.26f * _haste;
+					return 4.52f * _haste;
 			}
 		}
 		set { _speed = value; }
@@ -71,6 +73,11 @@ public partial class Survivor : CharacterBody3D
 	{
 		get { return _repairSpeed; }
 	}
+		public Item HeldItem
+	{ 
+		get { return _heldItem; }
+		set { _heldItem = value; }
+	}
 	
 	public void ClearInteraction()
 	{
@@ -98,16 +105,19 @@ public partial class Survivor : CharacterBody3D
 	
 	public override void _Ready()
 	{
-		_model = GetNode<MeshInstance3D>("Model");
+		_model = GetNode<Node3D>("Model");
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
 		_cameraArm = GetNode<SpringArm3D>("CameraPivot/SpringArm3D");
 		_camera = GetNode<Camera3D>("CameraPivot/SpringArm3D/Camera3D");
+		_survivorAnim = GetNode<AnimationPlayer>("Model/AnimationPlayer");
 		// Lock the mouse cursor to the center of the screen and hide it
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		_survivorAnim.Play("UAL1/Idle");
 	}
 	
 	public override void _Process(double delta)
 	{
+		// Interaction
 		if (Input.IsActionPressed("interaction 1"))
 		{
 			foreach (InteractArea area in _interactAreas)
@@ -135,16 +145,36 @@ public partial class Survivor : CharacterBody3D
 			ClearInteraction();
 		}
 		
+		// Movement
 		if (Input.IsActionPressed("run"))
 		{
 			_movement = MoveState.Running;
-			// GD.Print(Name + " is Walking");
-			// GD.Print(Speed);
+			if (_survivorAnim.CurrentAnimation != "UAL1/Sprint")
+			{
+				_survivorAnim.Play("UAL1/Sprint");
+			}
+			// GD.Print(Name + " is running.");
+		}
+		else if (Input.IsActionPressed("forward") 
+			  || Input.IsActionPressed("backward") 
+			  || Input.IsActionPressed("left")
+			  || Input.IsActionPressed("right"))
+		{
+			_movement = MoveState.Walking;
+			if (_survivorAnim.CurrentAnimation != "UAL1/Walk")
+			{
+				_survivorAnim.Play("UAL1/Walk");
+			}
+			// GD.Print(Name + " is walking.");
 		}
 		else
 		{
-			_movement = MoveState.Walking;
-			// GD.Print(Name + " is Walking");
+			_movement = MoveState.Standing;
+			if (_survivorAnim.CurrentAnimation != "UAL1/Idle")
+			{
+				_survivorAnim.Play("UAL1/Idle");
+			}
+			// GD.Print(Name + " is standing.");
 		}
 	}
 	
@@ -171,8 +201,9 @@ public partial class Survivor : CharacterBody3D
 		cameraForward.Y = 0; // Keep movement horizontal
 		cameraRight.Y = 0;
 		direction = -cameraForward * inputDir.Y + cameraRight * inputDir.X;
-		_model.LookAt(GlobalPosition + direction + new Vector3(0, 1, 0));
+		_model.LookAt(GlobalPosition + -direction, Vector3.Up);
 		}
+		
 		if (direction != Vector3.Zero)
 		{
 			velocity.X = direction.X * Speed;

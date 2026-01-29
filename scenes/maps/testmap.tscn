@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ciqthunbe58db"]
+[gd_scene format=3 uid="uid://ciqthunbe58db"]
 
 [ext_resource type="Texture2D" uid="uid://okf4fiki5xtt" path="res://textures/forest_grass_01.png" id="1_c27os"]
 [ext_resource type="PackedScene" uid="uid://0iv8qr5qkotk" path="res://scenes/props/generator.tscn" id="3_o7ia3"]
@@ -30,30 +30,30 @@ material = SubResource("StandardMaterial3D_hkjbe")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5orm7"]
 
-[node name="TestMap" type="Node3D"]
+[node name="TestMap" type="Node3D" unique_id=77074480]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1533269868]
 environment = SubResource("Environment_goqyv")
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="." unique_id=245890820]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1708227410]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("PlaneMesh_dkeku")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1572874358]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 visible = false
 shape = SubResource("WorldBoundaryShape3D_5orm7")
 
-[node name="Generator" parent="." instance=ExtResource("3_o7ia3")]
+[node name="Generator" parent="." unique_id=1755666297 instance=ExtResource("3_o7ia3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
-[node name="LTWall" parent="." instance=ExtResource("5_2nkbr")]
+[node name="LTWall" parent="." unique_id=1266893219 instance=ExtResource("5_2nkbr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
 
-[node name="LongWallGym" parent="." instance=ExtResource("5_c27os")]
+[node name="LongWallGym" parent="." unique_id=21673679 instance=ExtResource("5_c27os")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 16)
 
-[node name="Survivor" parent="." instance=ExtResource("6_goqyv")]
+[node name="Survivor" parent="." unique_id=842521922 instance=ExtResource("6_goqyv")]

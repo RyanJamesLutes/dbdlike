@@ -9,7 +9,8 @@ public partial class PropSpawner : Node3D
 	
 	private static Dictionary<string, string> PropDict = new Dictionary<string, string>
 	{
-		{ "Generator", "res://scenes/props/generator.tscn" }
+		{ "Generator", "res://scenes/props/generator.tscn" },
+		{ "Hook", "res://scenes/props/hook.tscn"}
 	};
 	
 	public void SpawnProp(string propName)

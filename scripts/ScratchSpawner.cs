@@ -7,12 +7,18 @@ public partial class ScratchSpawner : Node3D
 	private Random _RNG = new Random();
 	private List<RayCast3D> _rayCasts = new List<RayCast3D>();
 	private Timer _spawnTimer;
+	private Player player;
+	private Survivor scratchParent;
 	
 	[Export] public PackedScene scratchScene = ResourceLoader.Load<PackedScene>("res://scenes/scratch.tscn");
 	
 	public void SpawnScratch()
 	{
-		if (GetParent() is Survivor parent && parent.Movement == Survivor.MoveState.Running)
+		
+		if (player is not null 
+			&& player.Type == Player.PlayerType.Killer  // Only spawn scratch marks if player is killer.
+			&& scratchParent is Survivor 
+			&& scratchParent.Movement == Survivor.MoveState.Running) // Only spawn scratch marks if the survivor is running.
 		{
 			foreach(RayCast3D rayCast in _rayCasts)
 			{
@@ -59,6 +65,8 @@ public partial class ScratchSpawner : Node3D
 	{
 		foreach (Node child in GetChildren())
 		{
+			player = GetNodeOrNull<Player>("%Player");
+			scratchParent = GetParentOrNull<Survivor>();
 			if (child is RayCast3D rayCast)
 			{
 				_rayCasts.Add(rayCast);

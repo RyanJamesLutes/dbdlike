@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Perk : Node
+public partial class SurvivorPerk : Node
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

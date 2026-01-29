@@ -3,20 +3,39 @@ using System;
 
 public partial class Player : Node
 {
+	[Serializable]
 	public enum PlayerType { Killer, Survivor }
 	
 	private PlayerType _type;
-	private PackedScene _character;
+	private int _blood;
+	private PackedScene _characterScene;
+	private CharacterBody3D _character;
 	
 	public PlayerType Type
 	{
 		get { return _type; }
 		set { _type = value; }
 	}
-	public PackedScene Character
+	public PackedScene CharacterScene
+	{
+		get { return _characterScene; }
+		set { _characterScene = value; }
+	}
+	public CharacterBody3D Character
 	{
 		get { return _character; }
-		set { _character = value; }
+		set 
+		{
+			if (value is Killer)
+			{
+				_type = PlayerType.Killer;
+			}
+			else
+			{
+				_type = PlayerType.Survivor;
+			}
+			_character = value; 
+		}
 	}
 	
 	// Called when the node enters the scene tree for the first time.

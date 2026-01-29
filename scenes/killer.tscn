@@ -1,11 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://c47h80xpwkj1b"]
+[gd_scene format=3 uid="uid://c47h80xpwkj1b"]
 
 [ext_resource type="Script" uid="uid://bjg2cc0o2paqg" path="res://scripts/Killer.cs" id="1_jc8e8"]
 [ext_resource type="PackedScene" uid="uid://blqhl1wmyj2wy" path="res://scenes/weapon.tscn" id="2_4tmj0"]
 [ext_resource type="Script" uid="uid://bbsv3u2ko5c6c" path="res://scripts/BasicAttackArea.cs" id="2_28wgy"]
 [ext_resource type="Script" uid="uid://duk3kh3m2v3iu" path="res://folder.gd" id="3_ore10"]
-[ext_resource type="Animation" uid="uid://briubvsawp8jh" path="res://animations/attack.res" id="3_u3xk2"]
-[ext_resource type="Animation" uid="uid://cpnty1ig2ukdp" path="res://animations/noise.res" id="4_28wgy"]
 
 [sub_resource type="Animation" id="Animation_fwc4p"]
 length = 0.001
@@ -225,8 +223,8 @@ tracks/5/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d5jxr"]
 _data = {
 &"RESET": SubResource("Animation_fwc4p"),
-&"stun": SubResource("Animation_28wgy"),
-&"vault": SubResource("Animation_gej02")
+&"debugstun": SubResource("Animation_28wgy"),
+&"debugvault": SubResource("Animation_gej02")
 }
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1bvp3"]
@@ -240,9 +238,6 @@ height = 2.0205078
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jc8e8"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hcaxd"]
-_data = {
-&"basicattack": ExtResource("3_u3xk2")
-}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4tmj0"]
 
@@ -257,53 +252,46 @@ noise = SubResource("FastNoiseLite_ore10")
 normalize = false
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mvqc0"]
-_data = {
-&"noise": ExtResource("4_28wgy")
-}
 
-[node name="Killer" type="CharacterBody3D"]
+[node name="Killer" type="CharacterBody3D" unique_id=119096948]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_jc8e8")
 
-[node name="KillerAnim" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_d5jxr")
-}
+[node name="KillerAnim" type="AnimationPlayer" parent="." unique_id=1300823687]
+libraries/ = SubResource("AnimationLibrary_d5jxr")
 
-[node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+[node name="Model" type="MeshInstance3D" parent="." unique_id=1908610820]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
 layers = 8
 mesh = SubResource("CapsuleMesh_1bvp3")
 surface_material_override/0 = SubResource("StandardMaterial3D_sugp2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=829163064]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_lquwl")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=136525151]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
-[node name="Weapon" parent="Camera3D" instance=ExtResource("2_4tmj0")]
-transform = Transform3D(-3.090861e-08, -3.090861e-08, -1, -0.70710653, 0.70710653, 0, 0.70710653, 0.70710653, -4.371139e-08, 0.8, -0.5, -0.8)
+[node name="Weapon" parent="Camera3D" unique_id=317729883 instance=ExtResource("2_4tmj0")]
+transform = Transform3D(-4.3272067e-08, -4.3272067e-08, -1.4, -0.98994946, 0.98994946, 0, 0.98994946, 0.98994946, -6.119594e-08, 0.8, -0.5, -0.8)
 
-[node name="BasicAttackArea" type="Area3D" parent="Camera3D"]
+[node name="BasicAttackArea" type="Area3D" parent="Camera3D" unique_id=2035282030]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1)
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("2_28wgy")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/BasicAttackArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/BasicAttackArea" unique_id=1325498708]
 shape = SubResource("CapsuleShape3D_jc8e8")
 
-[node name="WeaponAnim" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hcaxd")
-}
+[node name="WeaponAnim" type="AnimationPlayer" parent="." unique_id=943327698]
+libraries/ = SubResource("AnimationLibrary_hcaxd")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1062893319]
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+[node name="ProgressBar" type="ProgressBar" parent="HUD" unique_id=1070947296]
 visible = false
 anchors_preset = 7
 anchor_left = 0.5
@@ -318,14 +306,14 @@ grow_horizontal = 2
 grow_vertical = 0
 step = 1.0
 
-[node name="TerrorRadius" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrorRadius"]
-transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, 0, 0, 0)
+[node name="TerrorRadius" type="Area3D" parent="." unique_id=761103955]
 visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrorRadius" unique_id=169332388]
+transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, 0, 0, 0)
 shape = SubResource("SphereShape3D_4tmj0")
 
-[node name="RedStain" type="SpotLight3D" parent="."]
+[node name="RedStain" type="SpotLight3D" parent="." unique_id=391154642]
 transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 2, 0.5)
 visible = false
 light_color = Color(0.5019608, 0.023529412, 0.023529412, 1)
@@ -338,18 +326,16 @@ spot_range = 10.0
 spot_attenuation = 0.3
 spot_angle = 30.0
 
-[node name="RedStainAnim" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mvqc0")
-}
+[node name="RedStainAnim" type="AnimationPlayer" parent="." unique_id=1331439317]
+libraries/ = SubResource("AnimationLibrary_mvqc0")
 
-[node name="Timers" type="Node" parent="."]
+[node name="Timers" type="Node" parent="." unique_id=952267279]
 script = ExtResource("3_ore10")
 
-[node name="AttackRecovery" type="Timer" parent="Timers"]
+[node name="AttackRecovery" type="Timer" parent="Timers" unique_id=482937192]
 wait_time = 1.5
 
-[node name="Chase" type="Timer" parent="Timers"]
+[node name="Chase" type="Timer" parent="Timers" unique_id=896569186]
 
 [connection signal="body_entered" from="Camera3D/BasicAttackArea" to="Camera3D/BasicAttackArea" method="OnBodyEntered"]
 [connection signal="body_exited" from="Camera3D/BasicAttackArea" to="Camera3D/BasicAttackArea" method="OnBodyExited"]

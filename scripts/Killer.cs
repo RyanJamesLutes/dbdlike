@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public partial class Killer : CharacterBody3D
 {
-	public enum MoveState { Walking, Lunging, LungeRecovery, Carrying, Stunned }
+	public enum MoveState { Walking, Lunging, LungeRecovery, CarryingSurvivor, Stunned }
 	public enum InteractState { None, AttackRecovery, Breaking, Vaulting, GrabbingSurvivor, DroppingSurvivor, HookingSurvivor, Mori }
 	
-	private float _speed = 4.6f;
+	private float _speed = 9.2f;
 	private float _haste = 1.0f;
 	private float _mouseSensitivity = 0.002f;	
 	private Camera3D _camera;
@@ -17,6 +17,7 @@ public partial class Killer : CharacterBody3D
 	private float _cameraPitchMax = 60f;
 	private MoveState _movement = MoveState.Walking;
 	private InteractState _interaction = InteractState.None;
+	private Survivor _carriedSurvivor;
 	private List<Node3D> _interactAreas = new List<Node3D>();
 	private BasicAttackArea _basicAttackArea;
 	private Node3D _interactTarget;
@@ -42,6 +43,11 @@ public partial class Killer : CharacterBody3D
 	{ 
 		get { return _interaction; }
 		set { _interaction = value; }
+	}
+	public Survivor CarriedSurvivor
+	{ 
+		get { return _carriedSurvivor; }
+		set { _carriedSurvivor = value; }
 	}
 	public List<Node3D> InteractAreas
 	{ 
