@@ -8,6 +8,7 @@ public partial class Survivor : CharacterBody3D
 	public enum MoveState { Crawling, Crouching, Standing, Walking, Running, Falling, Staggered, Interacting }
 	public enum InteractState { None, Repairing, Healing, DroppingPallet, VaultingPallet, VaultingWindow, CleansingTotem, BooningTotem, Invoking }
 	
+	private Player _player;
 	private Node3D _model;
 	[Export] private float _speed = 2.26f;
 	private float _haste = 1f;
@@ -103,8 +104,41 @@ public partial class Survivor : CharacterBody3D
 		}
 	}
 	
+	public void ProcessAnimations()
+	{
+		switch (_interaction)
+		{
+			// TODO
+		}
+		
+		switch (_movement)
+		{
+			case MoveState.Walking: 
+				if (_survivorAnim.CurrentAnimation != "UAL1/Walk")
+				{
+					_survivorAnim.Play("UAL1/Walk");
+				}
+				return;
+			case MoveState.Running:
+				if (_survivorAnim.CurrentAnimation != "UAL1/Sprint")
+				{
+					_survivorAnim.Play("UAL1/Sprint");
+				}
+				return;
+			case MoveState.Standing:
+			default:
+				if (_survivorAnim.CurrentAnimation != "UAL1/Idle")
+				{
+					_survivorAnim.Play("UAL1/Idle");
+				}
+				return;
+			}
+		}
+	
 	public override void _Ready()
 	{
+		_player = Owner.GetNode<Player>("%Player");
+		
 		_model = GetNode<Node3D>("Model");
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
 		_cameraArm = GetNode<SpringArm3D>("CameraPivot/SpringArm3D");
@@ -112,7 +146,6 @@ public partial class Survivor : CharacterBody3D
 		_survivorAnim = GetNode<AnimationPlayer>("Model/AnimationPlayer");
 		// Lock the mouse cursor to the center of the screen and hide it
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		_survivorAnim.Play("UAL1/Idle");
 	}
 	
 	public override void _Process(double delta)
@@ -149,10 +182,6 @@ public partial class Survivor : CharacterBody3D
 		if (Input.IsActionPressed("run"))
 		{
 			_movement = MoveState.Running;
-			if (_survivorAnim.CurrentAnimation != "UAL1/Sprint")
-			{
-				_survivorAnim.Play("UAL1/Sprint");
-			}
 			// GD.Print(Name + " is running.");
 		}
 		else if (Input.IsActionPressed("forward") 
@@ -161,21 +190,15 @@ public partial class Survivor : CharacterBody3D
 			  || Input.IsActionPressed("right"))
 		{
 			_movement = MoveState.Walking;
-			if (_survivorAnim.CurrentAnimation != "UAL1/Walk")
-			{
-				_survivorAnim.Play("UAL1/Walk");
-			}
 			// GD.Print(Name + " is walking.");
 		}
 		else
 		{
 			_movement = MoveState.Standing;
-			if (_survivorAnim.CurrentAnimation != "UAL1/Idle")
-			{
-				_survivorAnim.Play("UAL1/Idle");
-			}
 			// GD.Print(Name + " is standing.");
 		}
+		
+		ProcessAnimations();
 	}
 	
 	public override void _PhysicsProcess(double delta)

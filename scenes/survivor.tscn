@@ -103,10 +103,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=746093521]
 shape = SubResource("SphereShape3D_dvhww")
-spring_length = 3.0
+spring_length = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=386997940]
 fov = 90.0
+near = 0.001
 
 [node name="Timers" type="Node" parent="." unique_id=1033151391]
 script = ExtResource("3_7yc2n")

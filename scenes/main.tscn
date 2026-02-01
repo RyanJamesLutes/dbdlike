@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://b7qctmvj1fglf" path="res://scripts/Game.cs" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bjcomu3vn4vnd" path="res://scenes/lobby.tscn" id="4_tbgi4"]
 
-[node name="Main" type="Node3D" unique_id=1957740940]
+[node name="Main" type="Node" unique_id=132207520]
 
 [node name="Player" type="Node" parent="." unique_id=2068890239]
 unique_name_in_owner = true

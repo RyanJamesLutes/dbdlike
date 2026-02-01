@@ -30,7 +30,7 @@ public partial class InteractArea : Area3D
 		{
 			survivor.InteractAreas.Add(this);
 		}
-		// Check if InteractArea is blocked by static bodies, and remove it if so. Will not work as expected if collision layers are not configured correctly!
+		// Check if InteractArea is blocked by static bodies, and remove it if so. Will not work as expected if collision layers are not configured correctly.
 		if (body is StaticBody3D staticBody)
 		{
 			GD.Print(Name + "blocked, removing from SceneTree.");

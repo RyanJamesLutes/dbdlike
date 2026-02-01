@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 public partial class Killer : CharacterBody3D
 {
-	public enum MoveState { Walking, Lunging, LungeRecovery, CarryingSurvivor, Stunned }
+	public enum MoveState { Standing, Walking, Lunging, LungeRecovery, CarryingSurvivor, Stunned }
 	public enum InteractState { None, AttackRecovery, Breaking, Vaulting, GrabbingSurvivor, DroppingSurvivor, HookingSurvivor, Mori }
 	
-	private float _speed = 9.2f;
+	private Player _player;
+	[Export]private float _speed = 9.2f;
 	private float _haste = 1.0f;
 	private float _mouseSensitivity = 0.002f;	
 	private Camera3D _camera;
@@ -15,7 +16,7 @@ public partial class Killer : CharacterBody3D
 	private float _cameraPitch = 0f;
 	private float _cameraPitchMin = -60f;
 	private float _cameraPitchMax = 60f;
-	private MoveState _movement = MoveState.Walking;
+	private MoveState _movement = MoveState.Standing;
 	private InteractState _interaction = InteractState.None;
 	private Survivor _carriedSurvivor;
 	private List<Node3D> _interactAreas = new List<Node3D>();
@@ -73,6 +74,25 @@ public partial class Killer : CharacterBody3D
 		_haste = 1.0f;
 	}
 	
+		public void ProcessAnimations()
+	{
+		switch (_interaction)
+		{
+			// TODO
+		}
+		
+		switch (_movement)
+		{
+			case MoveState.Standing:
+			default:
+				if (_killerAnim.CurrentAnimation != "UAL1/Idle")
+				{
+					_killerAnim.Play("UAL1/Idle");
+				}
+				return;
+		}
+	}
+	
 	public void DoBasicAttack()
 	{
 			_weaponAnim.Play("basicattack");
@@ -96,11 +116,18 @@ public partial class Killer : CharacterBody3D
 	
 	public override void _Ready()
 	{
+		_player = Owner.GetNode<Player>("%Player");
+		
 		_camera = GetNode<Camera3D>("Camera3D");
 		_progressBar = GetNode<ProgressBar>("HUD/ProgressBar");
+		_killerAnim = GetNode<AnimationPlayer>("Model/AnimationPlayer");
 		_weaponAnim = GetNode<AnimationPlayer>("WeaponAnim");	
 		_basicAttackArea = GetNode<BasicAttackArea>("Camera3D/BasicAttackArea");
 		
+		if (_player.Type == Player.CharacterType.Survivor)
+		{
+			GetNode<SpotLight3D>("RedStain").Visible = true;
+		}
 		GetNode<AnimationPlayer>("RedStainAnim").Play("noise");
 		
 		// Lock the mouse cursor to the center of the screen and hide it
@@ -113,6 +140,16 @@ public partial class Killer : CharacterBody3D
 		{
 			DoBasicAttack();
 		}
+		if (Input.IsActionPressed("forward") 
+	  	 || Input.IsActionPressed("backward") 
+	  	 || Input.IsActionPressed("left")
+	  	 || Input.IsActionPressed("right"))
+		{
+			_movement = MoveState.Walking;
+			// GD.Print(Name + " is walking.");
+		}
+		
+		ProcessAnimations();
 	}
 	
 	public override void _PhysicsProcess(double delta)

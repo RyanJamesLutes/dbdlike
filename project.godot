@@ -30,7 +30,7 @@ project/assembly_name="dbdlike"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/basic_shape_creation/plugin.cfg", "res://addons/godot_3d_auto_collision_generator/plugin.cfg", "res://addons/meshcombiner/plugin.cfg", "res://addons/progress_bar_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/basic_shape_creation/plugin.cfg", "res://addons/godot_3d_auto_collision_generator/plugin.cfg", "res://addons/meshcombiner/plugin.cfg", "res://addons/progress_bar_3d/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg")
 
 [input]
 

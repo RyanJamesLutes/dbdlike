@@ -4,14 +4,14 @@ using System;
 public partial class Player : Node
 {
 	[Serializable]
-	public enum PlayerType { Killer, Survivor }
+	public enum CharacterType { Killer, Survivor }
 	
-	private PlayerType _type;
+	private CharacterType _type;
 	private int _blood;
 	private PackedScene _characterScene;
 	private CharacterBody3D _character;
 	
-	public PlayerType Type
+	public CharacterType Type
 	{
 		get { return _type; }
 		set { _type = value; }
@@ -28,11 +28,11 @@ public partial class Player : Node
 		{
 			if (value is Killer)
 			{
-				_type = PlayerType.Killer;
+				_type = CharacterType.Killer;
 			}
 			else
 			{
-				_type = PlayerType.Survivor;
+				_type = CharacterType.Survivor;
 			}
 			_character = value; 
 		}
