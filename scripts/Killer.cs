@@ -146,7 +146,7 @@ public partial class Killer : CharacterBody3D
 		if (GetNode<Timer>("Timers/LungeTime").IsStopped()) 
 		{ 
 			GetNode<Timer>("Timers/LungeTime").Start();
-		} 
+		}
 	}
 	
 	public async void DoLungeAttack()
@@ -210,22 +210,6 @@ public partial class Killer : CharacterBody3D
 		{
 			GetNode<Timer>("Timers/AttackButton").Start();
 		}
-
-		if (Input.IsActionPressed("forward")
-		 || Input.IsActionPressed("backward")
-		 || Input.IsActionPressed("left")
-		 || Input.IsActionPressed("right"))
-		{
-			if (_movement == MoveState.Standing)
-			{
-				_movement = MoveState.Walking;
-			}
-			// GD.Print(Name + " is walking.");
-		}
-		else
-		{
-			_movement = MoveState.Standing;
-		}
 		
 		ProcessAnimations();
 		
@@ -247,6 +231,12 @@ public partial class Killer : CharacterBody3D
 		Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
 		Vector3 direction = Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y);
 		direction = direction.Normalized();
+		if (_movement == MoveState.Lunging)
+		{
+		direction = -_camera.GlobalTransform.Basis.Z;
+		direction.Y = 0;
+		direction = direction.Normalized();
+		}
 		if (direction != Vector3.Zero)
 		{
 			velocity.X = Mathf.MoveToward(velocity.X, direction.X * _speed, _acceleration * (float)delta);
@@ -257,6 +247,7 @@ public partial class Killer : CharacterBody3D
 			// Decelerate when no input is given.
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, _deceleration * (float)delta);
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, _deceleration * (float)delta);
+			_movement = MoveState.Standing;
 		}
 		
 		Velocity = velocity;

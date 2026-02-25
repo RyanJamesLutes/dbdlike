@@ -390,10 +390,10 @@ one_shot = true
 [connection signal="body_entered" from="Camera3D/AttackArea" to="Camera3D/AttackArea" method="OnBodyEntered"]
 [connection signal="body_exited" from="Camera3D/AttackArea" to="Camera3D/AttackArea" method="OnBodyExited"]
 [connection signal="timeout" from="Timers/AttackButton" to="." method="Lunge"]
-[connection signal="timeout" from="Timers/MissedAttackRecovery" to="." method="ClearInteraction"]
 [connection signal="timeout" from="Timers/MissedAttackRecovery" to="." method="ClearMovement"]
+[connection signal="timeout" from="Timers/MissedAttackRecovery" to="." method="ClearInteraction"]
 [connection signal="timeout" from="Timers/LungeTime" to="." method="DoLungeAttack"]
-[connection signal="timeout" from="Timers/MissedLungeRecovery" to="." method="ClearInteraction"]
 [connection signal="timeout" from="Timers/MissedLungeRecovery" to="." method="ClearMovement"]
+[connection signal="timeout" from="Timers/MissedLungeRecovery" to="." method="ClearInteraction"]
 
 [editable path="Model"]
