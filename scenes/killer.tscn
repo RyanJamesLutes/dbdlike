@@ -368,7 +368,7 @@ libraries/ = SubResource("AnimationLibrary_mvqc0")
 script = ExtResource("3_ore10")
 
 [node name="AttackButton" type="Timer" parent="Timers" unique_id=1280089537]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="MissedAttackRecovery" type="Timer" parent="Timers" unique_id=482937192]

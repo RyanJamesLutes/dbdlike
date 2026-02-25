@@ -77,7 +77,10 @@ public partial class ShootProjectile : Power
 			GetParent<Killer>().GetParent<Map>().AddChild(projectileInstance);
 			
 			// Set projectile spawn coordinates and properly space it away from the body.
-			projectileInstance.GlobalTransform = new Transform3D(projectileInstance.GlobalTransform.Basis, camera.GlobalTransform.Origin - camera.GlobalTransform.Basis.Z);
+			projectileInstance.GlobalTransform = new Transform3D(
+													camera.GlobalTransform.Basis.Rotated(Vector3.Up, Mathf.Pi / 2f),
+													camera.GlobalTransform.Origin - camera.GlobalTransform.Basis.Z * 3.0f
+												);
 			
 			Shoot(projectileInstance, direction, _strength);
 			_strength = _minStrength;

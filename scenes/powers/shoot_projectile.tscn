@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://btsky6rh4gpcg"]
 
 [ext_resource type="Script" uid="uid://mwpasby2n67t" path="res://scripts/ShootProjectile.cs" id="1_myvew"]
-[ext_resource type="PackedScene" uid="uid://l28n0i1bekje" path="res://scenes/projectiles/debug_projectile.tscn" id="2_ffcho"]
+[ext_resource type="PackedScene" uid="uid://l28n0i1bekje" path="res://scenes/projectiles/debug_axe.tscn" id="2_ffcho"]
 [ext_resource type="Script" uid="uid://duk3kh3m2v3iu" path="res://folder.gd" id="3_ffcho"]
 
 [node name="ShootProjectile" type="Node3D" unique_id=254164964]
