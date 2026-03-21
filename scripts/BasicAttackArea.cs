@@ -13,13 +13,13 @@ public partial class BasicAttackArea : Area3D
 
 	private async void OnBodyEntered(Node3D body)
 	{
-		//GD.Print(body.Name + " entered area " + GetParent().Name + "/" + Name);
+		GD.Print(body.Name + " entered area " + GetParent().Name + "/" + Name);
 		_collidingBodies.Add(body);
 	}
 	
 	void OnBodyExited(Node3D body)
 	{
-		//GD.Print(body.Name + " exited area " + GetParent().Name + "/" + Name);
+		GD.Print(body.Name + " exited area " + GetParent().Name + "/" + Name);
 		_collidingBodies.Remove(body);
 	}
 	

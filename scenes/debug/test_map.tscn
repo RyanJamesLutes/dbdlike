@@ -3,10 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://okf4fiki5xtt" path="res://textures/forest_grass_01.png" id="1_c27os"]
 [ext_resource type="Script" uid="uid://cv70nb3q1gqcl" path="res://scripts/Player.cs" id="1_goqyv"]
 [ext_resource type="Script" uid="uid://dfk7rhnpsgaa8" path="res://scenes/debug/TestMap.cs" id="1_o7ia3"]
+[ext_resource type="Script" uid="uid://dj8isr5huhsfh" path="res://scripts/Main.cs" id="1_r5srr"]
 [ext_resource type="PackedScene" uid="uid://dr8goioxu587w" path="res://scenes/debug/debug_ruler.tscn" id="6_axw8a"]
 [ext_resource type="PackedScene" uid="uid://c47h80xpwkj1b" path="res://scenes/killer.tscn" id="6_pjele"]
 [ext_resource type="Script" uid="uid://1brbhd26mlvi" path="res://scripts/TileSpawner.cs" id="6_qoqmi"]
-[ext_resource type="PackedScene" uid="uid://wicr0eittpgt" path="res://scenes/survivor.tscn" id="6_r5srr"]
+[ext_resource type="PackedScene" uid="uid://wicr0eittpgt" path="res://scenes/survivor.tscn" id="8_sbngn"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a3b3n"]
 
@@ -35,6 +36,7 @@ material = SubResource("StandardMaterial3D_hkjbe")
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5orm7"]
 
 [node name="Main" type="Node" unique_id=1669921824]
+script = ExtResource("1_r5srr")
 
 [node name="Player" type="Node" parent="." unique_id=826829512]
 unique_name_in_owner = true
@@ -84,7 +86,7 @@ script = ExtResource("6_qoqmi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
 script = ExtResource("6_qoqmi")
 
-[node name="Survivor" parent="Map" unique_id=1363274708 instance=ExtResource("6_r5srr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09813747, 0, -3.574495)
-
 [node name="DebugRuler" parent="." unique_id=440311452 instance=ExtResource("6_axw8a")]
+
+[node name="Survivor" parent="." unique_id=1363274708 instance=ExtResource("8_sbngn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

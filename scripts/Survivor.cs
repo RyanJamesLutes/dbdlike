@@ -78,8 +78,9 @@ public partial class Survivor : CharacterBody3D
 		GetNode<ProgressBar>("HUD/ProgressBar").Visible = false;
 	}
 	
-	public void Injure()
+	public void Injure(CharacterBody3D source)
 	{
+		GD.Print(this.Name + " inured by " + source.Name);
 		switch (_health)
 		{
 			// TODO: Handle status effects like Endurance and Exposed.

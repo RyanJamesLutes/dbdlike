@@ -13,6 +13,7 @@ public partial class Killer : CharacterBody3D
 	private float _acceleration = 60.0f;
 	private float _deceleration = 90.0f;
 	private float _lungeSpeed = 13.56f;
+	private bool _hasLunged = false; // Used to prevent repeat lunges by holding attack.
 	private float _haste = 1.0f;
 	private float _mouseSensitivity = 0.002f;
 	private Camera3D _camera;
@@ -125,19 +126,40 @@ public partial class Killer : CharacterBody3D
 	
 	public async void DoBasicAttack() 
 	{
-		GetNode<Timer>("Timers/AttackButton").Stop();
 		if (!_weaponAnim.IsPlaying()) 
 		{ 
-			_weaponAnim.Play("attack");
+			_weaponAnim.Play("Attack");
 		} 
+		
 		await ToSignal(_weaponAnim, AnimationPlayer.SignalName.AnimationFinished);
-		GetNode<Timer>("Timers/MissedAttackRecovery").Start();
-		Interaction = InteractState.Recovery;
-		Movement = MoveState.AttackRecovery;
 		List<Node3D> targets = GetNode<BasicAttackArea>("Camera3D/AttackArea").CollidingBodies;
+		targets.Sort((a, b) => a.GlobalPosition.DistanceTo(this.GlobalPosition).CompareTo(b.GlobalPosition.DistanceTo(this.GlobalPosition)));
 		
-		// TODO: Write working hit detection. 
-		
+		if (targets.Count == 0)
+		{
+			// Attack misses.
+			GetNode<Timer>("Timers/AttackMissRecovery").Start();
+			_weaponAnim.Play("AttackMissRecovery");
+			Interaction = InteractState.Recovery;
+			Movement = MoveState.AttackRecovery;
+		}
+		else if (targets.Count >= 0 && targets[0] is Survivor survivor)
+		{
+			// Attack hits survivor.
+			survivor.Injure((CharacterBody3D)this);
+			GetNode<Timer>("Timers/AttackHitRecovery").Start();
+			_weaponAnim.Play("AttackHitRecovery");
+			Interaction = InteractState.Recovery;
+			Movement = MoveState.AttackRecovery;
+		}
+		else if (targets.Count >= 0)
+		{
+			// +1 wood.
+			GetNode<Timer>("Timers/AttackMissRecovery").Start();
+			_weaponAnim.Play("AttackMissRecovery");
+			Interaction = InteractState.Recovery;
+			Movement = MoveState.AttackRecovery;
+		}
 	}
 	
 	public void Lunge()
@@ -151,19 +173,40 @@ public partial class Killer : CharacterBody3D
 	
 	public async void DoLungeAttack()
 	{
-		GetNode<Timer>("Timers/AttackButton").Stop();
 		if (!_weaponAnim.IsPlaying())
 		{
-			_weaponAnim.Play("attack");
+			_weaponAnim.Play("Attack");
 		}
-		
 		await ToSignal(_weaponAnim, AnimationPlayer.SignalName.AnimationFinished);
-		GetNode<Timer>("Timers/MissedLungeRecovery").Start();
-		Interaction = InteractState.Recovery;
-		Movement = MoveState.LungeRecovery;
-		List<Node3D> targets = GetNode<BasicAttackArea>("Camera3D/AttackArea").CollidingBodies;
 		
-		// TODO: Write working hit detection. 
+		List<Node3D> targets = GetNode<BasicAttackArea>("Camera3D/AttackArea").CollidingBodies;
+		targets.Sort((a, b) => a.GlobalPosition.DistanceTo(this.GlobalPosition).CompareTo(b.GlobalPosition.DistanceTo(this.GlobalPosition)));
+		
+		if (targets.Count == 0)
+		{
+			// Attack misses.
+			GetNode<Timer>("Timers/LungeRecovery").Start();
+			_weaponAnim.Play("AttackMissRecovery");
+			Interaction = InteractState.Recovery;
+			Movement = MoveState.LungeRecovery;
+		}
+		if (targets.Count >= 0 && targets[0] is Survivor survivor)
+		{
+			// Attack hits survivor.
+			survivor.Injure((CharacterBody3D)this);
+			GetNode<Timer>("Timers/LungeHitRecovery").Start();
+			_weaponAnim.Play("AttackHitRecovery");
+			Interaction = InteractState.Recovery;
+			Movement = MoveState.LungeRecovery;
+		}
+		else if (targets.Count >= 0)
+		{
+			// +1 wood.
+			GetNode<Timer>("Timers/AttackMissRecovery").Start();
+			_weaponAnim.Play("AttackMissRecovery");
+			Interaction = InteractState.Recovery;
+			Movement = MoveState.AttackRecovery;
+		}
 	}
 	
 	public void Stun(Node3D pallet, Node3D survivor, float seconds)
@@ -198,22 +241,28 @@ public partial class Killer : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustReleased("interaction 1") 
-		&& _interaction != InteractState.Recovery)
+		if (Input.IsActionJustReleased("interaction 1")) 
 		{
-			DoBasicAttack();
+			_hasLunged = false;
+			GetNode<Timer>("Timers/AttackButtonHeld").Stop();
+			
+			if (_interaction != InteractState.Recovery )
+			{
+			DoBasicAttack();	
+			}
 		}
+		
 		if (Input.IsActionPressed("interaction 1")
 		&& _interaction != InteractState.Recovery
 		&& (_movement == MoveState.Standing || _movement == MoveState.Walking)
-		&& GetNode<Timer>("Timers/AttackButton").IsStopped())
+		&& GetNode<Timer>("Timers/AttackButtonHeld").IsStopped())
 		{
-			GetNode<Timer>("Timers/AttackButton").Start();
+			GetNode<Timer>("Timers/AttackButtonHeld").Start();
 		}
 		
 		ProcessAnimations();
 		
-		GD.Print($"Movement: {_movement}, Interaction: {_interaction}");
+		// GD.Print($"Movement: {_movement}, Interaction: {_interaction}");
 	}
 
 	public override void _PhysicsProcess(double delta)

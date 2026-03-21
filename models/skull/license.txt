@@ -1,0 +1,11 @@
+Model Information:
+* title:	Skull of Snofaeratu
+* source:	https://sketchfab.com/3d-models/skull-of-snofaeratu-6f354fff46964403aa7abd1dc9692837
+* author:	snofaeratu (https://sketchfab.com/snofaeratu)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Skull of Snofaeratu" (https://sketchfab.com/3d-models/skull-of-snofaeratu-6f354fff46964403aa7abd1dc9692837) by snofaeratu (https://sketchfab.com/snofaeratu) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bones
+* source:	https://sketchfab.com/3d-models/bones-925518d5d7ef4c7c94aa89c4b57ab394
+* author:	Joshua Fox (https://sketchfab.com/Fox.joshua)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bones" (https://sketchfab.com/3d-models/bones-925518d5d7ef4c7c94aa89c4b57ab394) by Joshua Fox (https://sketchfab.com/Fox.joshua) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
